@@ -1,0 +1,28 @@
+<div class="col-md-12">
+  <h3>Gallery</h3>
+  <div class="gallery-btn">
+    <button type="button" class="btn btn-default btn-small" ng-if="!isNew"
+    ng-click="changeView(isNew)">
+    <span class="glyphicon glyphicon-plus"></span> Add</button>
+  </div>
+  <div ng-if="isNew">
+    <div class="col-md-6">
+      <form class="form-inline">
+        <div class="form-group">
+        <label for="exampleInputName2">Name</label>
+          <input type="text" class="form-control" placeholder="selfie"
+          ng-model="name">
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="createFolder(name)">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div ng-repeat="folder in folders">
+    	<div class="col-md-2">
+    		<span class="glyphicon glyphicon-folder-open"></span>  - <a href="#" editable-text="folder.name">{{ folder.name || 'empty' }}</a>
+        <a href="/#/selected_gallery/{{folder.id}}"><span class="glyphicon glyphicon-pencil"></span></a>
+    	</div>
+    </div>
+  </div>
+</div>

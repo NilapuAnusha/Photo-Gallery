@@ -1,0 +1,15 @@
+<div class="col-md-12">
+  <h3>Upload</h3>
+  <div class="row">
+    <div class="col-md-4">
+      <input type="file" ngf-select="" ng-model="picFile" name="file" multiple accept="image/*" required="">
+    </div>
+    <button ng-click="uploadPic(picFile)">Submit</button>
+  </div>
+  <div class="row"></div>
+    <img ng-if="picFile" ngf-src="picFile" class="thumb">
+  </div>
+  <div class="col-md-1 image-gallery" ng-repeat="file in images">
+  	<img ngf-src="file" class="thumb">
+  </div>
+</div>

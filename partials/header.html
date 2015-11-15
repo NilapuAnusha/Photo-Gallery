@@ -1,0 +1,15 @@
+<div class="navbar navbar-inverse ">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/#/home">Personal Photo Gallery</a>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-if="!userInfo"><a href="/#/login">Login</a></li>
+          <li ng-if="!userInfo"><a href="/#/signup">Signup</a></li>
+          <li ng-if="userInfo"><a href="/#/gallery">{{userInfo.name}}</a></li>
+          <li ng-if="userInfo">
+           <a href="/"ng-click="logout()" ng-controller="userCtrl">Logout</a>
+          </li>
+        </ul>
+      </div>
+		</div>
+	</div>
