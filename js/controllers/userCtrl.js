@@ -35,14 +35,15 @@ app
     }
     
     $scope.login = function (user) {
-      var exist = false;
-      for (var i = 0; i < $scope.userList.length; i++) {
-        if($scope.userList[i].username === user.username) {
-          exist = true;
-          var info = $scope.userList[i];
-        }
-      };
-      if (exist === true) {
+      if(user) {
+        var exist = false;
+        for (var i = 0; i < $scope.userList.length; i++) {
+          if($scope.userList[i].username === user.username) {
+            exist = true;
+            var info = $scope.userList[i];
+          }
+        };
+        if (exist === true) {
           if(info.password === user.password) {
             $rootScope.userInfo = info;
             localStorageService.set('user', $rootScope.userInfo);
@@ -55,28 +56,35 @@ app
         } else {
           growl.addErrorMessage("username is incorrect");
         }
+      } else {
+        growl.addErrorMessage("fill the form");
+      }
     }
 
     $scope.signup = function (details) {
-      var exist = false;
-      for (var i = 0; i < $scope.userList.length; i++) {
-        if($scope.userList[i].username === user.username) {
-          exist = true;
-        }
-      };
-      if(exist === false) {
-        if ($scope.userList) {
-          details.id = $scope.userList.length - 1;
+      if(details) {
+        var exist = false;
+        for (var i = 0; i < $scope.userList.length; i++) {
+          if($scope.userList[i].username === details.username) {
+            exist = true;
+          }
+        };
+        if(exist === false) {
+          if ($scope.userList) {
+            details.id = $scope.userList.length - 1;
+          } else {
+            details.id = 0;
+          }
+          $scope.userList.push(details);
+          localStorageService.set('usersList', $scope.userList);
+          var lsKeys = localStorageService.keys();
+          console.log('***************', lsKeys);
+          $location.path('/login');
         } else {
-          details.id = 0;
+          growl.addErrorMessage("username has already taken");
         }
-        $scope.userList.push(details);
-        localStorageService.set('usersList', $scope.userList);
-        var lsKeys = localStorageService.keys();
-        console.log('***************', lsKeys);
-        $location.path('/login');
       } else {
-        growl.addErrorMessage("username has already taken");
+        growl.addErrorMessage("fill the form");
       }
     }
 
